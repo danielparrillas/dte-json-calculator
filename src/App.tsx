@@ -29,7 +29,7 @@ function App() {
 					</CardHeader>
 				</Card>
 			</header>
-			<main className="max-w-4xl grow py-4 w-full">
+			<main className="max-w-4xl grow py-4 w-full px-6">
 				<Accordion type="single" collapsible className="mb-4">
 					<AccordionItem value="item-1">
 						<AccordionTrigger>Paso 1: Sube los archivos JSON</AccordionTrigger>
