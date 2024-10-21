@@ -1,48 +1,44 @@
+import { Button } from "@/components/ui/button";
 import { DataTable } from "@/components/ui/data-table";
-import { useDteStore } from "@/hooks/dteStore";
-import { jsonToObject } from "@/utils/jsonToObject";
+import { setSelectedJson, useDteStore } from "@/hooks/dteStore";
 import { ColumnDef } from "@tanstack/react-table";
-import { useEffect, useState } from "react";
+import { Eye } from "lucide-react";
 
 export default function TableSection() {
-	const files = useDteStore((state) => state.files);
-	const [jsons, setJsons] = useState<any[]>([]);
+	const jsons = useDteStore((state) => state.jsons);
+	console.log(jsons);
 
-	useEffect(() => {
-		if (!files) {
-			setJsons([]);
-			return;
-		}
-		const promises = Array.from(files).map((file) => jsonToObject(file));
-		Promise.all(promises)
-			.then((jsons) => {
-				setJsons(jsons);
-			})
-			.catch((error) => {
-				console.error("Error al leer los archivos", error);
-			});
-	}, [files, files?.length]);
-
-	console.log("jsons", jsons);
-
-	return <DataTable columns={columns()} data={jsons} />;
+	return <DataTable columns={columns} data={jsons} />;
 }
 
-const columns = (): ColumnDef<unknown>[] => [
+const columns: ColumnDef<unknown>[] = [
 	{
 		id: "Emisor",
 		accessorFn: (row) => row.codigoEmpresa,
 	},
 	{
 		id: "Emisor NIT",
-		accessorFn: (row) => row.emisor.nit,
+		accessorFn: (row) => row.emisor?.nit,
 	},
 	{
 		id: "Código de generación",
-		accessorFn: (row) => row.identificacion.codigoGeneracion.replace(/-/g, ""),
+		accessorFn: (row) =>
+			row.identificacion?.codigoGeneracion?.replace(/-/g, ""),
 	},
 	{
 		id: "Número de control",
-		accessorFn: (row) => row.identificacion.numeroControl.replace(/-/g, ""),
+		accessorFn: (row) => row.identificacion?.numeroControl?.replace(/-/g, ""),
+	},
+	{
+		id: "Acciones",
+		header: "",
+		cell: ({ row }) => (
+			<Button
+				className="p-0.5 size-auto bg-blue-600 hover:bg-blue-700"
+				onClick={() => setSelectedJson(row.original as object)}
+			>
+				<Eye className="size-4" />
+			</Button>
+		),
 	},
 ];

@@ -1,3 +1,4 @@
+import JsonSheetViewer from "./components/json-sheet-viewer";
 import {
 	Accordion,
 	AccordionItem,
@@ -41,7 +42,7 @@ function App() {
 					</AccordionItem>
 				</Accordion>
 				<UpploadSection />
-				<Accordion type="single" collapsible className="mb-4 mt-8">
+				<Accordion type="single" collapsible className="mb-4 mt-12">
 					<AccordionItem value="item-1">
 						<AccordionTrigger>
 							Paso 2: Cálculo de los resultados
@@ -54,7 +55,8 @@ function App() {
 				</Accordion>
 				<TableSection />
 			</main>
-			<footer className="w-full flex justify-center border-t shadow-sm bg-muted">
+			<JsonSheetViewer />
+			<footer className="w-full flex justify-center border-t shadow-sm bg-muted mt-16">
 				<Card className="max-w-4xl w-full border-none shadow-none bg-transparent">
 					<CardHeader>
 						<CardTitle className="text-xl">Acerca de</CardTitle>

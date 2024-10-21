@@ -1,4 +1,4 @@
-export const jsonToObject = (file: File) => {
+export const jsonToObject = (file: File): Promise<object> => {
 	return new Promise((resolve, reject) => {
 		const reader = new FileReader();
 		reader.onload = (event) => {
