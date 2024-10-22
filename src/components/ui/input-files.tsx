@@ -95,11 +95,8 @@ export default function InputFiles({
 			<ScrollArea className="h-72 w-full rounded-md border">
 				<div className="p-4">
 					{Array.from(files.current.files).map((file) => (
-						<>
-							<div
-								key={file.name}
-								className="flex overflow-hidden relative items-center justify-between gap-2 p-2 group"
-							>
+						<div key={file.name}>
+							<div className="flex overflow-hidden relative items-center justify-between gap-2 p-2 group">
 								<p className="flex gap-2 text-muted-foreground text-xs">
 									<IconFile fileName={file.name} />
 									{file.name}
@@ -115,7 +112,7 @@ export default function InputFiles({
 								</Button>
 							</div>
 							<Separator className="my-2" />
-						</>
+						</div>
 					))}
 				</div>
 			</ScrollArea>

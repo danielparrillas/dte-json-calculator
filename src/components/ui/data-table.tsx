@@ -277,7 +277,7 @@ export function DataTable<TData, TValue>({
 									className="group"
 								>
 									{row.getVisibleCells().map((cell) => (
-										<TableCell key={cell.id} className="py-1.5">
+										<TableCell key={cell.id} className="py-1.5 text-nowrap">
 											{flexRender(
 												cell.column.columnDef.cell,
 												cell.getContext()

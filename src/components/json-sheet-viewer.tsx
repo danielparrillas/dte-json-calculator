@@ -27,11 +27,12 @@ export default function JsonSheetViewer() {
 						Navega entre las propiedades del JSON
 					</SheetDescription>
 				</SheetHeader>
-				<div className="grow overflow-y-auto">
+				<div className="grow w-full sm:max-w-4xl overflow-y-auto overflow-x-auto">
 					<ReactJson
 						src={selectedJson || {}}
 						displayDataTypes={false}
 						indentWidth={2}
+						collapsed={2}
 					/>
 				</div>
 				<SheetFooter>

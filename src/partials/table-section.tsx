@@ -6,12 +6,21 @@ import { Eye } from "lucide-react";
 
 export default function TableSection() {
 	const jsons = useDteStore((state) => state.jsons);
-	console.log(jsons);
-
-	return <DataTable columns={columns} data={jsons} />;
+	return <DataTable columns={columns} data={jsons} filerBy="Emisor NIT" />;
 }
 
-const columns: ColumnDef<unknown>[] = [
+const columns: ColumnDef<DTE>[] = [
+	{
+		id: "Fecha de emisión",
+		accessorFn: (row) => row.identificacion?.fecEmi,
+		cell: ({ row }) => (
+			<span className="text-nowrap">{row.original.identificacion?.fecEmi}</span>
+		),
+	},
+	{
+		id: "Fecha de hora",
+		accessorFn: (row) => row.identificacion?.horEmi,
+	},
 	{
 		id: "Emisor",
 		accessorFn: (row) => row.codigoEmpresa,
@@ -28,6 +37,42 @@ const columns: ColumnDef<unknown>[] = [
 	{
 		id: "Número de control",
 		accessorFn: (row) => row.identificacion?.numeroControl?.replace(/-/g, ""),
+	},
+	{
+		id: "Emisor NRC",
+		accessorFn: (row) => row.emisor?.nrc,
+	},
+	{
+		id: "Receptor NIT",
+		accessorFn: (row) => row.receptor?.nit,
+	},
+	{
+		id: "Receptor NRC",
+		accessorFn: (row) => row.receptor?.nrc,
+	},
+	{
+		id: "Receptor Nombre",
+		accessorFn: (row) => row.receptor?.nombre,
+	},
+	{
+		id: "Código Actividad Emisor",
+		accessorFn: (row) => row.emisor?.codActividad,
+	},
+	{
+		id: "Dirección Emisor - Departamento",
+		accessorFn: (row) => row.emisor?.direccion?.departamento,
+	},
+	{
+		id: "Dirección Emisor - Municipio",
+		accessorFn: (row) => row.emisor?.direccion?.municipio,
+	},
+	{
+		id: "Total Gravada",
+		accessorFn: (row) => row.resumen?.totalGravada,
+	},
+	{
+		id: "Total a Pagar",
+		accessorFn: (row) => row.resumen?.totalPagar,
 	},
 	{
 		id: "Acciones",
