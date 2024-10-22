@@ -39,32 +39,12 @@ const columns: ColumnDef<DTE>[] = [
 		accessorFn: (row) => row.identificacion?.numeroControl?.replace(/-/g, ""),
 	},
 	{
-		id: "Emisor NRC",
-		accessorFn: (row) => row.emisor?.nrc,
-	},
-	{
 		id: "Receptor NIT",
 		accessorFn: (row) => row.receptor?.nit,
 	},
 	{
-		id: "Receptor NRC",
-		accessorFn: (row) => row.receptor?.nrc,
-	},
-	{
 		id: "Receptor Nombre",
 		accessorFn: (row) => row.receptor?.nombre,
-	},
-	{
-		id: "Código Actividad Emisor",
-		accessorFn: (row) => row.emisor?.codActividad,
-	},
-	{
-		id: "Dirección Emisor - Departamento",
-		accessorFn: (row) => row.emisor?.direccion?.departamento,
-	},
-	{
-		id: "Dirección Emisor - Municipio",
-		accessorFn: (row) => row.emisor?.direccion?.municipio,
 	},
 	{
 		id: "Total Gravada",
