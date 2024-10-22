@@ -16,8 +16,8 @@ import UpploadSection from "./partials/uppload-section";
 
 function App() {
 	return (
-		<div className="h-screen flex flex-col items-center bg-card lg:px-8">
-			<header className="w-full flex justify-center border-b shadow-sm">
+		<div className="h-screen flex flex-col items-center bg-card">
+			<header className="w-full flex justify-center border-b shadow-sm lg:px-8">
 				<Card className="w-full border-none shadow-none">
 					<CardHeader>
 						<CardTitle className="text-2xl">
@@ -30,7 +30,7 @@ function App() {
 					</CardHeader>
 				</Card>
 			</header>
-			<main className="grow py-4 w-full px-6">
+			<main className="grow py-4 w-full px-6 lg:px-8">
 				<Accordion type="single" collapsible className="mb-4">
 					<AccordionItem value="item-1">
 						<AccordionTrigger>Paso 1: Sube los archivos JSON</AccordionTrigger>
@@ -56,7 +56,7 @@ function App() {
 				<TableSection />
 			</main>
 			<JsonSheetViewer />
-			<footer className="w-full flex justify-center border-t shadow-sm bg-muted mt-16">
+			<footer className="w-full flex justify-center border-t shadow-sm bg-muted mt-16 lg:px-8">
 				<Card className="w-full border-none shadow-none bg-transparent">
 					<CardHeader>
 						<CardTitle className="text-xl">Acerca de</CardTitle>
