@@ -12,13 +12,16 @@ export default function TableSection() {
 const columns: ColumnDef<DTE>[] = [
 	{
 		id: "Fecha de emisión",
-		accessorFn: (row) => row.identificacion?.fecEmi,
+		accessorFn: (row) =>
+			row.identificacion?.fecEmi?.split("-").reverse().join("/"),
 		cell: ({ row }) => (
-			<span className="text-nowrap">{row.original.identificacion?.fecEmi}</span>
+			<span className="text-nowrap">
+				{row.original.identificacion?.fecEmi?.split("-").reverse().join("/")}
+			</span>
 		),
 	},
 	{
-		id: "Fecha de hora",
+		id: "Hora de emisión",
 		accessorFn: (row) => row.identificacion?.horEmi,
 	},
 	{
@@ -48,15 +51,16 @@ const columns: ColumnDef<DTE>[] = [
 	},
 	{
 		id: "Total Gravada",
-		accessorFn: (row) => row.resumen?.totalGravada,
+		accessorFn: (row) => Number(row.resumen?.totalGravada).toFixed(2),
 	},
 	{
 		id: "Total a Pagar",
-		accessorFn: (row) => row.resumen?.totalPagar,
+		accessorFn: (row) => Number(row.resumen?.totalPagar).toFixed(2),
 	},
 	{
 		id: "Acciones",
 		header: "",
+		accessorFn: () => "",
 		cell: ({ row }) => (
 			<Button
 				className="p-0.5 size-auto bg-blue-600 hover:bg-blue-700"
