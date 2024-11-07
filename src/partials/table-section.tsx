@@ -26,7 +26,7 @@ const columns: ColumnDef<DTE>[] = [
 	},
 	{
 		id: "Emisor",
-		accessorFn: (row) => row.codigoEmpresa,
+		accessorFn: (row) => row.emisor?.nombre,
 	},
 	{
 		id: "Emisor NIT",

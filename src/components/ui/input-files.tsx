@@ -129,6 +129,10 @@ export default function InputFiles({
 					</span>
 				</div>
 			)}
+			<p className="text-center text-muted-foreground text-sm mt-1">
+				{length} Archivo{length === 1 ? "" : "s"} cargado
+				{length === 1 ? "" : "s"}
+			</p>
 		</div>
 	);
 }

@@ -11,6 +11,7 @@ import {
 	CardHeader,
 	CardTitle,
 } from "./components/ui/card";
+import ErrorsSection from "./partials/errors-section";
 import TableSection from "./partials/table-section";
 import UpploadSection from "./partials/uppload-section";
 
@@ -42,6 +43,7 @@ function App() {
 					</AccordionItem>
 				</Accordion>
 				<UpploadSection />
+				<ErrorsSection />
 				<Accordion type="single" collapsible className="mb-4 mt-12">
 					<AccordionItem value="item-1">
 						<AccordionTrigger>

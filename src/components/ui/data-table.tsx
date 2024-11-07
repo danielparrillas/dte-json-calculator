@@ -432,6 +432,9 @@ export function DataTablePagination<TData>({
 						<ArrowRightToLine className="h-4 w-4" />
 					</Button>
 				</div>
+				<p className="text-muted-foreground">
+					Total de filas {table.getFilteredRowModel().rows.length}
+				</p>
 			</div>
 		</div>
 	);

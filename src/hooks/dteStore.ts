@@ -3,12 +3,14 @@ import { create } from "zustand";
 
 interface DteStore {
 	jsons: DTE[];
+	errors: { file: string; error: { message: string } }[];
 	selectedJson: DTE | null;
 	setSelectedJson: (json: DTE) => void;
 }
 
 export const useDteStore = create<DteStore>()((set) => ({
 	jsons: [],
+	errors: [],
 	selectedJson: null,
 	setSelectedJson: (json) => set({ selectedJson: json }),
 }));
@@ -17,20 +19,35 @@ export const setSelectedJson = (json: DTE | null) => {
 	useDteStore.setState({ selectedJson: json });
 };
 
-export const setJsonsFromFiles = (files: FileList | null) => {
+export const setJsonsFromFiles = async (files: FileList | null) => {
 	if (!files || files === null) {
 		useDteStore.setState({ jsons: [] });
 		return;
 	}
-	const promises: Promise<DTE>[] = Array.from(files).map((file) =>
-		jsonToObject(file)
-	) as Promise<DTE>[];
+	const promises = Array.from(files).map((file) =>
+		jsonToObject(file).then(
+			(json) => ({ status: "fulfilled", value: json }),
+			(error) => ({
+				status: "rejected",
+				file: file.name,
+				error: { message: error.message || "Error desconocido" },
+			})
+		)
+	);
 
-	Promise.all(promises)
-		.then((jsons) => {
-			useDteStore.setState({ jsons });
-		})
-		.catch((error) => {
-			console.error("Error al leer los archivos", error);
-		});
+	Promise.all(promises).then((results) => {
+		const jsons = results
+			.filter((result) => result.status === "fulfilled")
+			.map((result) => (result as PromiseFulfilledResult<DTE>).value);
+
+		const errors = results
+			.filter((result) => result.status === "rejected")
+			.map((result) => ({
+				file: (result as { status: string; file: string }).file,
+				error: (result as { status: string; error: { message: string } }).error,
+			}));
+
+		console.log({ jsons, errors });
+		useDteStore.setState({ jsons, errors });
+	});
 };
