@@ -58,6 +58,11 @@ const columns: ColumnDef<DTE>[] = [
 		accessorFn: (row) => Number(row.resumen?.totalPagar).toFixed(2),
 	},
 	{
+		id: "Apendice: Sello",
+		accessorFn: (row) =>
+			row.apendice?.find((i) => i.etiqueta === "Sello")?.valor,
+	},
+	{
 		id: "Acciones",
 		header: "",
 		accessorFn: () => "",
