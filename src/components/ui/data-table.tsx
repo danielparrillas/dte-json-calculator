@@ -56,8 +56,8 @@ import {
 } from "./select";
 import { Popover, PopoverContent, PopoverTrigger } from "./popover";
 import { Separator } from "./separator";
-import * as XLSX from "xlsx";
 import { ScrollArea } from "./scroll-area";
+import { exportTableToExcel } from "@/utils/exportToXLSXFromDataTable";
 
 interface DataTableColumnHeaderProps<TData, TValue>
 	extends React.HTMLAttributes<HTMLDivElement> {
@@ -312,35 +312,9 @@ export function DataTableExport<TData>({
 	exportedFileName,
 }: DataTableExportProps<TData>) {
 	const handleExport = () => {
-		// Obtener los nombres de las columnas
-		const columnNames = table
-			.getAllColumns()
-			.filter((column) => column.getIsVisible())
-			.map((column) => {
-				const meta = column.columnDef.meta as { title: string };
-				return typeof meta?.title === "string" ? meta?.title : column.id;
-			});
-
-		// Obtener los datos de las filas filtradas
-		const data = table
-			.getFilteredRowModel()
-			.rows.map((row) =>
-				row.getVisibleCells().map((cell) => String(cell.getValue()))
-			);
-		// Incluir los nombres de las columnas como la primera fila
-		const worksheetData = [columnNames, ...data];
-
-		const workbook = XLSX.utils.book_new();
-		const worksheet = XLSX.utils.aoa_to_sheet(worksheetData);
-		XLSX.utils.book_append_sheet(workbook, worksheet, "Solicitudes");
-		XLSX.writeFile(
-			workbook,
-			`${exportedFileName || "export"} - ${new Date().toLocaleString()}.xlsx`,
-			{
-				compression: true,
-			}
-		);
+		exportTableToExcel(table, exportedFileName);
 	};
+
 	return (
 		<Button
 			variant="outline"

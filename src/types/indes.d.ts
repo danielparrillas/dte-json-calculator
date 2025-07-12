@@ -115,7 +115,7 @@ interface Extension {
 
 interface Apendice {
 	campo?: string | null;
-	etiqueta?: string | null;
+	etiqueta?: string | null; // puede haber una que contiene la palabra sello
 	valor?: string | null;
 }
 
@@ -149,4 +149,5 @@ interface DTE {
 	token?: string | null;
 	digital?: string | null;
 	codeQR?: string | null;
+	//selloRecibido || SelloRecepcion
 }
