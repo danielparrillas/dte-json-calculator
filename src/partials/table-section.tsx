@@ -7,7 +7,7 @@ import { Eye } from "lucide-react";
 
 export default function TableSection() {
 	const jsons = useDteStore((state) => state.jsons);
-	return <DataTable columns={columns} data={jsons} filerBy="Emisor NIT" />;
+	return <DataTable columns={columns} data={jsons} filterBy="Emisor NIT" />;
 }
 const columns: ColumnDef<DTE>[] = [
 	{

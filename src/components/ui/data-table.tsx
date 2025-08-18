@@ -164,7 +164,7 @@ export function DataTableColumnHeader<TData, TValue>({
 interface DataTableProps<TData, TValue> {
 	columns: ColumnDef<TData, TValue>[];
 	data: TData[];
-	filerBy?: string;
+	filterBy?: string;
 	noDataContent?: ReactNode;
 	calcTotals?: ReactNode;
 	headerContent?: ReactNode;
@@ -178,7 +178,7 @@ interface DataTableProps<TData, TValue> {
 
 export function DataTable<TData, TValue>({
 	columns,
-	filerBy,
+	filterBy,
 	noDataContent,
 	calcTotals = true,
 	headerContent,
@@ -222,15 +222,15 @@ export function DataTable<TData, TValue>({
 	return (
 		<div>
 			<div className="flex flex-wrap items-center gap-2 pb-4">
-				{filerBy && (
+				{filterBy && (
 					<div className="flex-grow">
 						<Input
-							placeholder={`Buscar por ${filerBy}`}
+							placeholder={`Buscar por ${filterBy}`}
 							value={
-								(table.getColumn(filerBy)?.getFilterValue() as string) ?? ""
+								(table.getColumn(filterBy)?.getFilterValue() as string) ?? ""
 							}
 							onChange={(event) =>
-								table.getColumn(filerBy)?.setFilterValue(event.target.value)
+								table.getColumn(filterBy)?.setFilterValue(event.target.value)
 							}
 							className="max-w-sm mr-2"
 						/>
