@@ -11,16 +11,16 @@ export function obtenerValorSello(dte: DTE): string | null {
 		}
 	}
 
-	// 2. Buscar en el arreglo de apéndices si hay alguna etiqueta que contenga la palabra "sello"
-	if (Array.isArray(dte.apendice)) {
-		for (const apendice of dte.apendice) {
-			if (apendice?.etiqueta && selloRegex.test(apendice.etiqueta)) {
-				if (apendice.valor && apendice.valor.trim() !== "") {
-					return apendice.valor;
-				}
-			}
-		}
-	}
+	// // 2. Buscar en el arreglo de apéndices si hay alguna etiqueta que contenga la palabra "sello"
+	// if (Array.isArray(dte.apendice) && dte.apendice?.length > 0) {
+	// 	for (const apendice of dte.apendice) {
+	// 		if (apendice?.etiqueta && selloRegex.test(apendice.etiqueta)) {
+	// 			if (apendice.valor && apendice.valor.trim() !== "") {
+	// 				return apendice.valor;
+	// 			}
+	// 		}
+	// 	}
+	// }
 
 	// Si no se encuentra ningún valor de sello
 	return null;

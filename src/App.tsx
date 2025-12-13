@@ -12,7 +12,6 @@ import {
 	CardTitle,
 } from "./components/ui/card";
 import ErrorsSection from "./partials/errors-section";
-import ItemsTableSection from "./partials/items-table-section";
 import TableSection from "./partials/table-section";
 import UpploadSection from "./partials/uppload-section";
 
@@ -57,7 +56,7 @@ function App() {
 					</AccordionItem>
 				</Accordion>
 				<TableSection />
-				<Accordion type="single" collapsible className="mb-4 mt-12">
+				{/* <Accordion type="single" collapsible className="mb-4 mt-12">
 					<AccordionItem value="item-1">
 						<AccordionTrigger>Paso 3: Detalle por items</AccordionTrigger>
 						<AccordionContent>
@@ -65,7 +64,7 @@ function App() {
 						</AccordionContent>
 					</AccordionItem>
 				</Accordion>
-				<ItemsTableSection />
+				<ItemsTableSection /> */}
 			</main>
 			<JsonSheetViewer />
 			<footer className="w-full flex justify-center border-t shadow-sm bg-muted mt-16 lg:px-8">

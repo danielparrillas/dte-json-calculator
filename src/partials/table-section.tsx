@@ -89,19 +89,84 @@ const columns: ColumnDef<DTE>[] = [
 			type: "string",
 		},
 	},
+	// {
+	// 	id: "Total Gravada",
+	// 	accessorFn: (row) => Number(row.resumen?.totalGravada).toFixed(2),
+	// 	meta: {
+	// 		title: "Total Gravada",
+	// 		type: "number",
+	// 	},
+	// },
+	// {
+	// 	id: "Total a Pagar",
+	// 	accessorFn: (row) => Number(row.resumen?.totalPagar).toFixed(2),
+	// 	meta: {
+	// 		title: "Total a Pagar",
+	// 		type: "number",
+	// 	},
+	// },
 	{
-		id: "Total Gravada",
-		accessorFn: (row) => Number(row.resumen?.totalGravada).toFixed(2),
+		id: "Valor Operaciones",
+		accessorFn: (row) => {
+			if (row.cuerpoDocumento && "valorOperaciones" in row.cuerpoDocumento) {
+				return Number(row.cuerpoDocumento.valorOperaciones).toFixed(2);
+			}
+			return "";
+		},
 		meta: {
-			title: "Total Gravada",
+			title: "Valor Operaciones",
 			type: "number",
 		},
 	},
 	{
-		id: "Total a Pagar",
-		accessorFn: (row) => Number(row.resumen?.totalPagar).toFixed(2),
+		id: "IVA",
+		accessorFn: (row) => {
+			if (row.cuerpoDocumento && "iva" in row.cuerpoDocumento) {
+				return Number(row.cuerpoDocumento.iva).toFixed(2);
+			}
+			return "";
+		},
 		meta: {
-			title: "Total a Pagar",
+			title: "IVA",
+			type: "number",
+		},
+	},
+	{
+		id: "IVA Percibido",
+		accessorFn: (row) => {
+			if (row.cuerpoDocumento && "ivaPercibido" in row.cuerpoDocumento) {
+				return Number(row.cuerpoDocumento.ivaPercibido).toFixed(2);
+			}
+			return "";
+		},
+		meta: {
+			title: "IVA Percibido",
+			type: "number",
+		},
+	},
+	{
+		id: "Comisión",
+		accessorFn: (row) => {
+			if (row.cuerpoDocumento && "comision" in row.cuerpoDocumento) {
+				return Number(row.cuerpoDocumento.comision).toFixed(2);
+			}
+			return "";
+		},
+		meta: {
+			title: "Comisión",
+			type: "number",
+		},
+	},
+	{
+		id: "Líquido a Pagar",
+		accessorFn: (row) => {
+			if (row.cuerpoDocumento && "liquidoApagar" in row.cuerpoDocumento) {
+				return Number(row.cuerpoDocumento.liquidoApagar).toFixed(2);
+			}
+			return "";
+		},
+		meta: {
+			title: "Líquido a Pagar",
 			type: "number",
 		},
 	},
