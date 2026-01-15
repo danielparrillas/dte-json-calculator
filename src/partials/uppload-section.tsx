@@ -1,7 +1,6 @@
 import InputFiles from "@/components/ui/input-files";
 import { setJsonsFromFiles, useDteStore } from "@/hooks/dteStore";
 import { toast } from "sonner";
-import { useStore } from "zustand";
 
 export default function UpploadSection() {
 	const handleDuplicateUpload = (file: File) => {

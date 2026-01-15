@@ -1,0 +1,90 @@
+export type Identificacion = {
+	version?: number | null;
+	ambiente?: string | null;
+	tipoDte?: string | null;
+	numeroControl?: string | null;
+	codigoGeneracion?: string | null;
+	tipoModelo?: number | null;
+	tipoOperacion?: number | null;
+	fecEmi?: string | null;
+	horEmi?: string | null;
+	tipoMoneda?: string | null;
+};
+
+type Direccion = {
+	departamento?: string | null;
+	municipio?: string | null;
+	complemento?: string | null;
+};
+
+export type Emisor = {
+	nit?: string | null;
+	nrc?: string | null;
+	nombre?: string | null;
+	codActividad?: string | null;
+	descActividad?: string | null;
+	nombreComercial?: string | null;
+	tipoEstablecimiento?: string | null;
+	telefono?: string | null;
+	correo?: string | null;
+	direccion?: Direccion | null;
+	codigoMH?: string | null;
+	codigo?: string | null;
+	puntoVentaMH?: string | null;
+	puntoVentaContri?: string | null;
+};
+
+export type Receptor = {
+	nit?: string | null;
+	nrc?: string | null;
+	nombre?: string | null;
+	codActividad?: string | null;
+	descActividad?: string | null;
+	nombreComercial?: string | null;
+	tipoEstablecimiento?: string | null;
+	direccion?: Direccion | null;
+	telefono?: string | null;
+	correo?: string | null;
+	codigoMH?: string | null;
+	puntoVentaMH?: string | null;
+};
+
+/**
+ * CuerpoDocumento para DTE 09 (Liquidación)
+ */
+export type CuerpoDocumento = {
+	periodoLiquidacionFechaInicio?: string | null;
+	periodoLiquidacionFechaFin?: string | null;
+	valorOperaciones?: number | null;
+	codLiquidacion?: string | null;
+	cantidadDoc?: number | null;
+	descripSinPercepcion?: string | null;
+	subTotal?: number | null;
+	iva?: number | null;
+	montoSujetoPercepcion?: number | null;
+	ivaPercibido?: number | null;
+	comision?: number | null;
+	porcentComision?: number | null;
+	ivaComision?: number | null;
+	liquidoApagar?: number | null;
+	montoSinPercepcion?: number | null;
+	totalLetras?: string | null;
+	observaciones?: string | null;
+};
+
+export type Extension = {
+	nombEntrega?: string | null;
+	docuEntrega?: string | null;
+	codEmpleado?: string | null;
+};
+
+export type DTE = {
+	identificacion?: Identificacion | null;
+	emisor?: Emisor | null;
+	receptor?: Receptor | null;
+	cuerpoDocumento?: CuerpoDocumento | null;
+	extension?: Extension | null;
+	apendice?: null;
+	selloRecibido?: string | null;
+	firmaElectronica?: string | null;
+};

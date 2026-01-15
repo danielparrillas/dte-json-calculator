@@ -19,6 +19,7 @@ import CCFItemsTableSection from "./partials/ccf/ccf-items-table-section";
 import { useDteStore } from "./hooks/dteStore";
 import { DTEFormat } from "./types/dteFormatEnum";
 import CCFTTableSection from "./partials/ccf-t/ccf-t-table-section";
+import DCLTTableSection from "./partials/dcl-t/dcl-t-t-table-section";
 
 function App() {
 	const dteFormat = useDteStore((state) => state.format);
@@ -74,6 +75,8 @@ function App() {
 				</Accordion>
 				{dteFormat === DTEFormat.CCF_T ? (
 					<CCFTTableSection />
+				) : dteFormat === DTEFormat.DCL_T ? (
+					<DCLTTableSection />
 				) : (
 					<CCFTableSection />
 				)}

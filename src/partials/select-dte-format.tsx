@@ -16,8 +16,7 @@ const DTE_FORMATS = [
 	{
 		id: DTEFormat.DCL_T,
 		name: "DCL-TARJ",
-		description: "Pendiente...",
-		disabled: true,
+		description: "Documento Contable de Liquidación - Tarjeta",
 	},
 ];
 
@@ -33,10 +32,8 @@ export const SelectDTEFormat: React.FC = () => {
 						"p-4 rounded-lg border-2 transition-all cursor-pointer",
 						selectedFormat === format.id
 							? "border-blue-500 bg-blue-50"
-							: "border-gray-300 bg-white hover:border-gray-400",
-						format.disabled && "opacity-50 cursor-not-allowed"
+							: "border-gray-300 bg-white hover:border-gray-400"
 					)}
-					disabled={format.disabled}
 				>
 					<div className="text-lg font-semibold text-gray-800">
 						{format.name}
