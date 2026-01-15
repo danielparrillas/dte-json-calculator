@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { DataTable } from "@/components/ui/data-table";
 import { setSelectedJson, useDteStore } from "@/hooks/dteStore";
 import { CuerpoDocumento, DTE } from "@/types/ccf";
-import { obtenerValorSello } from "@/utils/selloSupport";
+import { obtenerValorSelloForCCF } from "@/utils/selloSupport";
 import { ColumnDef } from "@tanstack/react-table";
 import { Eye } from "lucide-react";
 
@@ -11,9 +11,9 @@ type Item = {
 	dte: DTE;
 };
 
-export default function ItemsTableSection() {
+function CCFItemsTableSection() {
 	const jsons = useDteStore((state) => state.jsons);
-	const items: Item[] = jsons
+	const items: Item[] = (jsons as DTE[])
 		.filter((json) => json.cuerpoDocumento)
 		.map((json) =>
 			(json.cuerpoDocumento || []).map((item) => ({ item, dte: json }))
@@ -84,7 +84,7 @@ const columns: ColumnDef<Item>[] = [
 	},
 	{
 		id: "Sello recepción",
-		accessorFn: ({ dte }) => obtenerValorSello(dte),
+		accessorFn: ({ dte }) => obtenerValorSelloForCCF(dte),
 		meta: {
 			title: "Sello recepción",
 			type: "string",
@@ -212,3 +212,5 @@ const columns: ColumnDef<Item>[] = [
 		},
 	},
 ];
+
+export default CCFItemsTableSection;

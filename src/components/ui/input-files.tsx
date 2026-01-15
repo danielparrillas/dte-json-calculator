@@ -91,6 +91,7 @@ export default function InputFiles({
 				className="hidden"
 				accept={accept}
 				multiple
+				// webkitdirectory="true"
 			/>
 			<ScrollArea className="h-72 w-full rounded-md border">
 				<div className="p-4">

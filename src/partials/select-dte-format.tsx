@@ -1,4 +1,5 @@
 import { setDteFormat, useDteStore } from "@/hooks/dteStore";
+import { cn } from "@/lib/utils";
 import { DTEFormat } from "@/types/dteFormatEnum";
 
 const DTE_FORMATS = [
@@ -15,7 +16,8 @@ const DTE_FORMATS = [
 	{
 		id: DTEFormat.DCL_T,
 		name: "DCL-TARJ",
-		description: "a",
+		description: "Pendiente...",
+		disabled: true,
 	},
 ];
 
@@ -27,11 +29,14 @@ export const SelectDTEFormat: React.FC = () => {
 				<button
 					key={format.id}
 					onClick={() => setDteFormat(format.id)}
-					className={`p-4 rounded-lg border-2 transition-all cursor-pointer ${
+					className={cn(
+						"p-4 rounded-lg border-2 transition-all cursor-pointer",
 						selectedFormat === format.id
 							? "border-blue-500 bg-blue-50"
-							: "border-gray-300 bg-white hover:border-gray-400"
-					}`}
+							: "border-gray-300 bg-white hover:border-gray-400",
+						format.disabled && "opacity-50 cursor-not-allowed"
+					)}
+					disabled={format.disabled}
 				>
 					<div className="text-lg font-semibold text-gray-800">
 						{format.name}

@@ -1,7 +1,10 @@
-import { DTE } from "@/types/ccf";
+import { DTE as CCF } from "@/types/ccf";
+import { DTE as CCFT } from "@/types/ccf_t";
 import { DTEFormat } from "@/types/dteFormatEnum";
 import { jsonToObject } from "@/utils/jsonToObject";
 import { create } from "zustand";
+
+type DTE = CCF | CCFT;
 
 interface DteStore {
 	format: DTEFormat | null;

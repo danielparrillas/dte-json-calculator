@@ -12,12 +12,16 @@ import {
 	CardTitle,
 } from "./components/ui/card";
 import ErrorsSection from "./partials/errors-section";
-import ItemsTableSection from "./partials/items-table-section";
 import { SelectDTEFormat } from "./partials/select-dte-format";
-import TableSection from "./partials/table-section";
+import CCFTableSection from "./partials/ccf/ccf-table-section";
 import UpploadSection from "./partials/uppload-section";
+import CCFItemsTableSection from "./partials/ccf/ccf-items-table-section";
+import { useDteStore } from "./hooks/dteStore";
+import { DTEFormat } from "./types/dteFormatEnum";
+import CCFTTableSection from "./partials/ccf-t/ccf-t-table-section";
 
 function App() {
+	const dteFormat = useDteStore((state) => state.format);
 	return (
 		<div className="h-screen flex flex-col items-center bg-card">
 			<header className="w-full flex justify-center border-b shadow-sm lg:px-8">
@@ -68,16 +72,25 @@ function App() {
 						</AccordionContent>
 					</AccordionItem>
 				</Accordion>
-				<TableSection />
-				<Accordion type="single" collapsible className="mb-4 mt-12">
-					<AccordionItem value="item-1">
-						<AccordionTrigger>Paso 4: Detalle por items</AccordionTrigger>
-						<AccordionContent>
-							Se muestra una tabla con los detalles de los items de cada DTE.
-						</AccordionContent>
-					</AccordionItem>
-				</Accordion>
-				<ItemsTableSection />
+				{dteFormat === DTEFormat.CCF_T ? (
+					<CCFTTableSection />
+				) : (
+					<CCFTableSection />
+				)}
+				{dteFormat === DTEFormat.CCF && (
+					<>
+						<Accordion type="single" collapsible className="mb-4 mt-12">
+							<AccordionItem value="item-1">
+								<AccordionTrigger>Paso 4: Detalle por items</AccordionTrigger>
+								<AccordionContent>
+									Se muestra una tabla con los detalles de los items de cada
+									DTE.
+								</AccordionContent>
+							</AccordionItem>
+						</Accordion>
+						<CCFItemsTableSection />
+					</>
+				)}
 			</main>
 			<JsonSheetViewer />
 			<footer className="w-full flex justify-center border-t shadow-sm bg-muted mt-16 lg:px-8">

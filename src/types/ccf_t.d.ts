@@ -1,4 +1,4 @@
-interface Identificacion {
+export type Identificacion = {
 	version?: number | null;
 	ambiente?: string | null;
 	tipoDte?: string | null;
@@ -9,15 +9,15 @@ interface Identificacion {
 	fecEmi?: string | null;
 	horEmi?: string | null;
 	tipoMoneda?: string | null;
-}
+};
 
-interface Direccion {
+type Direccion = {
 	departamento?: string | null;
 	municipio?: string | null;
 	complemento?: string | null;
-}
+};
 
-interface Emisor {
+export type Emisor = {
 	nit?: string | null;
 	nrc?: string | null;
 	nombre?: string | null;
@@ -32,9 +32,9 @@ interface Emisor {
 	codigo?: string | null;
 	puntoVentaMH?: string | null;
 	puntoVentaContri?: string | null;
-}
+};
 
-interface Receptor {
+export type Receptor = {
 	nit?: string | null;
 	nrc?: string | null;
 	nombre?: string | null;
@@ -47,12 +47,12 @@ interface Receptor {
 	correo?: string | null;
 	codigoMH?: string | null;
 	puntoVentaMH?: string | null;
-}
+};
 
 /**
  * CuerpoDocumento para DTE 09 (Liquidación)
  */
-interface CuerpoDocumento {
+export type CuerpoDocumento = {
 	periodoLiquidacionFechaInicio?: string | null;
 	periodoLiquidacionFechaFin?: string | null;
 	valorOperaciones?: number | null;
@@ -70,15 +70,15 @@ interface CuerpoDocumento {
 	montoSinPercepcion?: number | null;
 	totalLetras?: string | null;
 	observaciones?: string | null;
-}
+};
 
-interface Extension {
+export type Extension = {
 	nombEntrega?: string | null;
 	docuEntrega?: string | null;
 	codEmpleado?: string | null;
-}
+};
 
-interface DTE {
+export type DTE = {
 	identificacion?: Identificacion | null;
 	emisor?: Emisor | null;
 	receptor?: Receptor | null;
@@ -87,4 +87,4 @@ interface DTE {
 	apendice?: null;
 	selloRecibido?: string | null;
 	firmaElectronica?: string | null;
-}
+};
