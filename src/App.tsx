@@ -13,6 +13,7 @@ import {
 } from "./components/ui/card";
 import ErrorsSection from "./partials/errors-section";
 import ItemsTableSection from "./partials/items-table-section";
+import { SelectDTEFormat } from "./partials/select-dte-format";
 import TableSection from "./partials/table-section";
 import UpploadSection from "./partials/uppload-section";
 
@@ -35,7 +36,18 @@ function App() {
 			<main className="grow py-4 w-full px-6 lg:px-8">
 				<Accordion type="single" collapsible className="mb-4">
 					<AccordionItem value="item-1">
-						<AccordionTrigger>Paso 1: Sube los archivos JSON</AccordionTrigger>
+						<AccordionTrigger>Paso 1: Elije el formato</AccordionTrigger>
+						<AccordionContent>
+							Selecciona el formato de tabla que deseas utilizar para explorar
+							los archivos JSON de los DTE. Puedes elegir entre formato CCF,
+							CCF-T y DCL-T
+						</AccordionContent>
+					</AccordionItem>
+				</Accordion>
+				<SelectDTEFormat />
+				<Accordion type="single" collapsible className="mb-4">
+					<AccordionItem value="item-1">
+						<AccordionTrigger>Paso 2: Sube los archivos JSON</AccordionTrigger>
 						<AccordionContent>
 							Los archivos JSON son los documentos electrónicos que se generan
 							en la factura electrónica. Puedes subir uno o varios archivos a la
@@ -48,7 +60,7 @@ function App() {
 				<Accordion type="single" collapsible className="mb-4 mt-12">
 					<AccordionItem value="item-1">
 						<AccordionTrigger>
-							Paso 2: Cálculo de los resultados
+							Paso 3: Cálculo de los resultados
 						</AccordionTrigger>
 						<AccordionContent>
 							Se extraen los datos de los archivos JSON y se presentan en una
@@ -59,7 +71,7 @@ function App() {
 				<TableSection />
 				<Accordion type="single" collapsible className="mb-4 mt-12">
 					<AccordionItem value="item-1">
-						<AccordionTrigger>Paso 3: Detalle por items</AccordionTrigger>
+						<AccordionTrigger>Paso 4: Detalle por items</AccordionTrigger>
 						<AccordionContent>
 							Se muestra una tabla con los detalles de los items de cada DTE.
 						</AccordionContent>

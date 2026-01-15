@@ -1,8 +1,10 @@
 import { DTE } from "@/types/ccf";
+import { DTEFormat } from "@/types/dteFormatEnum";
 import { jsonToObject } from "@/utils/jsonToObject";
 import { create } from "zustand";
 
 interface DteStore {
+	format: DTEFormat | null;
 	jsons: DTE[];
 	errors: { file: string; error: { message: string } }[];
 	selectedJson: DTE | null;
@@ -10,11 +12,15 @@ interface DteStore {
 }
 
 export const useDteStore = create<DteStore>()((set) => ({
+	format: null,
 	jsons: [],
 	errors: [],
 	selectedJson: null,
 	setSelectedJson: (json) => set({ selectedJson: json }),
 }));
+
+export const setDteFormat = (format: DTEFormat | null) =>
+	useDteStore.setState({ format });
 
 export const setSelectedJson = (json: DTE | null) => {
 	useDteStore.setState({ selectedJson: json });
