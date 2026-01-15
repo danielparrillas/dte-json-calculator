@@ -20,6 +20,7 @@ import { useDteStore } from "./hooks/dteStore";
 import { DTEFormat } from "./types/dteFormatEnum";
 import CCFTTableSection from "./partials/ccf-t/ccf-t-table-section";
 import DCLTTableSection from "./partials/dcl-t/dcl-t-t-table-section";
+import CCFTItemsTableSection from "./partials/ccf-t/ccf-t-items-table-section";
 
 function App() {
 	const dteFormat = useDteStore((state) => state.format);
@@ -80,7 +81,7 @@ function App() {
 				) : (
 					<CCFTableSection />
 				)}
-				{dteFormat === DTEFormat.CCF && (
+				{(dteFormat === DTEFormat.CCF || dteFormat === DTEFormat.CCF_T) && (
 					<>
 						<Accordion type="single" collapsible className="mb-4 mt-12">
 							<AccordionItem value="item-1">
@@ -91,7 +92,11 @@ function App() {
 								</AccordionContent>
 							</AccordionItem>
 						</Accordion>
-						<CCFItemsTableSection />
+						{dteFormat === DTEFormat.CCF_T ? (
+							<CCFTItemsTableSection />
+						) : (
+							<CCFItemsTableSection />
+						)}
 					</>
 				)}
 			</main>

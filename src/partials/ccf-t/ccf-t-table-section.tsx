@@ -36,22 +36,6 @@ const columns: ColumnDef<DTE>[] = [
 		},
 	},
 	{
-		id: "Emisor",
-		accessorFn: (row) => row.emisor?.nombre,
-		meta: {
-			title: "Emisor",
-			type: "string",
-		},
-	},
-	{
-		id: "Emisor NIT",
-		accessorFn: (row) => row.emisor?.nit,
-		meta: {
-			title: "Emisor NIT",
-			type: "string",
-		},
-	},
-	{
 		id: "Código de generación",
 		accessorFn: (row) =>
 			row.identificacion?.codigoGeneracion?.replace(/-/g, ""),
@@ -77,6 +61,22 @@ const columns: ColumnDef<DTE>[] = [
 		},
 	},
 	{
+		id: "Emisor",
+		accessorFn: (row) => row.emisor?.nombre,
+		meta: {
+			title: "Emisor",
+			type: "string",
+		},
+	},
+	{
+		id: "Emisor NIT",
+		accessorFn: (row) => row.emisor?.nit,
+		meta: {
+			title: "Emisor NIT",
+			type: "string",
+		},
+	},
+	{
 		id: "Receptor NIT",
 		accessorFn: (row) => row.receptor?.nit || "",
 		meta: {
@@ -93,83 +93,74 @@ const columns: ColumnDef<DTE>[] = [
 		},
 	},
 	// {
-	// 	id: "Total Gravada",
-	// 	accessorFn: (row) => Number(row.resumen?.totalGravada).toFixed(2),
+	// 	id: "Observaciones",
+	// 	accessorFn: (row) => row.cuerpoDocumento?.observaciones || "",
 	// 	meta: {
-	// 		title: "Total Gravada",
-	// 		type: "number",
-	// 	},
-	// },
-	// {
-	// 	id: "Total a Pagar",
-	// 	accessorFn: (row) => Number(row.resumen?.totalPagar).toFixed(2),
-	// 	meta: {
-	// 		title: "Total a Pagar",
-	// 		type: "number",
+	// 		title: "Observaciones",
+	// 		type: "string",
 	// 	},
 	// },
 	{
-		id: "Valor Operaciones",
-		accessorFn: (row) => {
-			if (row.cuerpoDocumento && "valorOperaciones" in row.cuerpoDocumento) {
-				return Number(row.cuerpoDocumento.valorOperaciones).toFixed(2);
-			}
-			return "";
-		},
+		id: "Tipo de DTE",
+		accessorFn: (row) => row.identificacion?.tipoDte || "",
 		meta: {
-			title: "Valor Operaciones",
+			title: "Tipo de DTE",
+			type: "string",
+		},
+	},
+	{
+		id: "Total No sujeto",
+		accessorFn: (row) => Number(row.resumen?.totalNoSuj).toFixed(2),
+		meta: {
+			title: "Total No sujeto",
 			type: "number",
 		},
 	},
 	{
-		id: "IVA",
-		accessorFn: (row) => {
-			if (row.cuerpoDocumento && "iva" in row.cuerpoDocumento) {
-				return Number(row.cuerpoDocumento.iva).toFixed(2);
-			}
-			return "";
-		},
+		id: "Total Exenta",
+		accessorFn: (row) => Number(row.resumen?.totalExenta).toFixed(2),
 		meta: {
-			title: "IVA",
+			title: "Total Exenta",
 			type: "number",
 		},
 	},
 	{
-		id: "IVA Percibido",
-		accessorFn: (row) => {
-			if (row.cuerpoDocumento && "ivaPercibido" in row.cuerpoDocumento) {
-				return Number(row.cuerpoDocumento.ivaPercibido).toFixed(2);
-			}
-			return "";
-		},
+		id: "Total Gravada",
+		accessorFn: (row) => Number(row.resumen?.totalGravada).toFixed(2),
 		meta: {
-			title: "IVA Percibido",
+			title: "Total Gravada",
 			type: "number",
 		},
 	},
 	{
-		id: "Comisión",
-		accessorFn: (row) => {
-			if (row.cuerpoDocumento && "comision" in row.cuerpoDocumento) {
-				return Number(row.cuerpoDocumento.comision).toFixed(2);
-			}
-			return "";
-		},
+		id: "Total a Pagar",
+		accessorFn: (row) => Number(row.resumen?.totalPagar).toFixed(2),
 		meta: {
-			title: "Comisión",
+			title: "Total a Pagar",
 			type: "number",
 		},
 	},
 	{
-		id: "Líquido a Pagar",
+		id: "Tributo",
 		accessorFn: (row) => {
-			if (row.cuerpoDocumento && "liquidoApagar" in row.cuerpoDocumento) {
-				return Number(row.cuerpoDocumento.liquidoApagar).toFixed(2);
-			}
-			return "";
+			const tributo =
+				(row.resumen?.tributos && row.resumen.tributos[0].descripcion) ||
+				"Sin tributo";
+			return tributo;
 		},
 		meta: {
-			title: "Líquido a Pagar",
+			title: "Tributo",
+			type: "number",
+		},
+	},
+	{
+		id: "Total IVA",
+		accessorFn: (row) => {
+			const iva = (row.resumen?.tributos && row.resumen.tributos[0].valor) || 0;
+			return Number(iva).toFixed(2);
+		},
+		meta: {
+			title: "Total IVA",
 			type: "number",
 		},
 	},
