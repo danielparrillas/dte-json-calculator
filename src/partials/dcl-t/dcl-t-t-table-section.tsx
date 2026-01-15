@@ -93,22 +93,14 @@ const columns: ColumnDef<DTE>[] = [
 			type: "string",
 		},
 	},
-	// {
-	// 	id: "Total Gravada",
-	// 	accessorFn: (row) => Number(row.resumen?.totalGravada).toFixed(2),
-	// 	meta: {
-	// 		title: "Total Gravada",
-	// 		type: "number",
-	// 	},
-	// },
-	// {
-	// 	id: "Total a Pagar",
-	// 	accessorFn: (row) => Number(row.resumen?.totalPagar).toFixed(2),
-	// 	meta: {
-	// 		title: "Total a Pagar",
-	// 		type: "number",
-	// 	},
-	// },
+	{
+		id: "Tipo de DTE",
+		accessorFn: (row) => row.identificacion?.tipoDte || "",
+		meta: {
+			title: "Tipo de DTE",
+			type: "string",
+		},
+	},
 	{
 		id: "Valor Operaciones",
 		accessorFn: (row) => {

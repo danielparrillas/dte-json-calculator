@@ -93,6 +93,14 @@ const columns: ColumnDef<DTE>[] = [
 		},
 	},
 	{
+		id: "Tipo de DTE",
+		accessorFn: (row) => row.identificacion?.tipoDte || "",
+		meta: {
+			title: "Tipo de DTE",
+			type: "string",
+		},
+	},
+	{
 		id: "Total Gravada",
 		accessorFn: (row) => Number(row.resumen?.totalGravada).toFixed(2),
 		meta: {
