@@ -14,7 +14,9 @@ type Item = {
 function CCFItemsTableSection() {
 	const jsons = useDteStore((state) => state.jsons);
 	const items: Item[] = (jsons as DTE[])
-		.filter((json) => json.cuerpoDocumento)
+		.filter(
+			(json) => json.cuerpoDocumento && Array.isArray(json.cuerpoDocumento)
+		)
 		.map((json) =>
 			(json.cuerpoDocumento || []).map((item) => ({ item, dte: json }))
 		)

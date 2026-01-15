@@ -1,6 +1,7 @@
 import InputFiles from "@/components/ui/input-files";
-import { setJsonsFromFiles } from "@/hooks/dteStore";
+import { setJsonsFromFiles, useDteStore } from "@/hooks/dteStore";
 import { toast } from "sonner";
+import { useStore } from "zustand";
 
 export default function UpploadSection() {
 	const handleDuplicateUpload = (file: File) => {
@@ -11,11 +12,14 @@ export default function UpploadSection() {
 		);
 	};
 
+	const isDisabled = useDteStore((state) => state.format) === null;
+
 	return (
 		<InputFiles
 			onChange={setJsonsFromFiles}
 			onDuplicateUpload={handleDuplicateUpload}
 			accept=".json"
+			disable={isDisabled}
 		/>
 	);
 }

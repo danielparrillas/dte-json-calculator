@@ -14,6 +14,7 @@ type Props = {
 	className?: string;
 	name?: string;
 	accept?: React.InputHTMLAttributes<HTMLInputElement>["accept"];
+	disable?: boolean;
 };
 
 type FileNames = string[];
@@ -25,6 +26,7 @@ export default function InputFiles({
 	onDuplicateUpload,
 	onMaxUpload,
 	accept,
+	disable,
 }: Props) {
 	const files = useRef<DataTransfer>(new DataTransfer());
 	const inputFile = useRef<HTMLInputElement>(null);
@@ -122,7 +124,8 @@ export default function InputFiles({
 					onClick={handleClickAddFiles}
 					className={cn(
 						"grid content-center h-10 w-full aspect-square rounded-md border border-muted-foreground border-dashed cursor-pointer mt-2",
-						length === 0 ? "col-span-2" : "animate-fade-in"
+						length === 0 ? "col-span-2" : "animate-fade-in",
+						disable && "pointer-events-none opacity-50 cursor-not-allowed"
 					)}
 				>
 					<span className="text-center text-sm text-muted-foreground">
