@@ -1,3 +1,4 @@
+import { DTE } from "@/types/ccf";
 import { jsonToObject } from "@/utils/jsonToObject";
 import { create } from "zustand";
 

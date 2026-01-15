@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { DataTable } from "@/components/ui/data-table";
 import { setSelectedJson, useDteStore } from "@/hooks/dteStore";
+import { CuerpoDocumento, DTE } from "@/types/ccf";
 import { obtenerValorSello } from "@/utils/selloSupport";
 import { ColumnDef } from "@tanstack/react-table";
 import { Eye } from "lucide-react";

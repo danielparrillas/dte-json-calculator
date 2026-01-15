@@ -1,4 +1,4 @@
-interface Identificacion {
+export type Identificacion = {
 	version?: number | null;
 	ambiente?: string | null;
 	tipoDte?: string | null;
@@ -11,15 +11,15 @@ interface Identificacion {
 	fecEmi?: string | null;
 	horEmi?: string | null;
 	tipoMoneda?: string | null;
-}
+};
 
-interface Direccion {
+export type Direccion = {
 	departamento?: string | null;
 	municipio?: string | null;
 	complemento?: string | null;
-}
+};
 
-interface Emisor {
+export type Emisor = {
 	nit?: string | null;
 	nrc?: string | null;
 	nombre?: string | null;
@@ -34,9 +34,9 @@ interface Emisor {
 	codEstable?: string | null;
 	codPuntoVentaMH?: string | null;
 	codPuntoVenta?: string | null;
-}
+};
 
-interface Receptor {
+export type Receptor = {
 	nit?: string | null;
 	nrc?: string | null;
 	nombre?: string | null;
@@ -46,9 +46,9 @@ interface Receptor {
 	direccion?: Direccion | null;
 	telefono?: string | null;
 	correo?: string | null;
-}
+};
 
-interface CuerpoDocumento {
+export type CuerpoDocumento = {
 	numItem?: number | null;
 	tipoItem?: number | null;
 	cantidad?: number | null;
@@ -63,23 +63,23 @@ interface CuerpoDocumento {
 	noGravado?: number | null;
 	tributos?: string[] | null;
 	psv?: number | null;
-}
+};
 
-interface Tributo {
+export type Tributo = {
 	codigo?: string | null;
 	descripcion?: string | null;
 	valor?: number | null;
-}
+};
 
-interface Pago {
+export type Pago = {
 	codigo?: string | null;
 	montoPago?: number | null;
 	referencia?: string | null;
 	plazo?: string | null;
 	periodo?: string | null;
-}
+};
 
-interface Resumen {
+export type Resumen = {
 	totalNoSuj?: number | null;
 	totalExenta?: number | null;
 	totalGravada?: number | null;
@@ -102,24 +102,24 @@ interface Resumen {
 	condicionOperacion?: number | null;
 	pagos?: Pago[] | null;
 	numPagoElectronico?: string | null;
-}
+};
 
-interface Extension {
+export type Extension = {
 	nombEntrega?: string | null;
 	docuEntrega?: string | null;
 	nombRecibe?: string | null;
 	docuRecibe?: string | null;
 	observaciones?: string | null;
 	placaVehiculo?: string | null;
-}
+};
 
-interface Apendice {
+export type Apendice = {
 	campo?: string | null;
 	etiqueta?: string | null; // puede haber una que contiene la palabra sello
 	valor?: string | null;
-}
+};
 
-interface ResponseMH {
+export type ResponseMH = {
 	version?: number | null;
 	ambiente?: string | null;
 	versionApp?: number | null;
@@ -132,9 +132,9 @@ interface ResponseMH {
 	codigoMsg?: string | null;
 	descripcionMsg?: string | null;
 	observaciones?: string[] | null;
-}
+};
 
-interface DTE {
+export type DTE = {
 	identificacion?: Identificacion | null;
 	documentoRelacionado?: string | null;
 	emisor?: Emisor | null;
@@ -150,4 +150,4 @@ interface DTE {
 	digital?: string | null;
 	codeQR?: string | null;
 	//selloRecibido || SelloRecepcion
-}
+};

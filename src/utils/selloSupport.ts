@@ -1,3 +1,5 @@
+import { DTE } from "@/types/ccf";
+
 export function obtenerValorSello(dte: DTE): string | null {
 	const selloRegex = /sello/i;
 
