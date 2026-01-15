@@ -36,22 +36,6 @@ const columns: ColumnDef<DTE>[] = [
 		},
 	},
 	{
-		id: "Emisor",
-		accessorFn: (row) => row.emisor?.nombre,
-		meta: {
-			title: "Emisor",
-			type: "string",
-		},
-	},
-	{
-		id: "Emisor NIT",
-		accessorFn: (row) => row.emisor?.nit,
-		meta: {
-			title: "Emisor NIT",
-			type: "string",
-		},
-	},
-	{
 		id: "Código de generación",
 		accessorFn: (row) =>
 			row.identificacion?.codigoGeneracion?.replace(/-/g, ""),
@@ -77,6 +61,23 @@ const columns: ColumnDef<DTE>[] = [
 		},
 	},
 	{
+		id: "Emisor",
+		accessorFn: (row) => row.emisor?.nombre,
+		meta: {
+			title: "Emisor",
+			type: "string",
+		},
+	},
+	{
+		id: "Emisor NIT",
+		accessorFn: (row) => row.emisor?.nit,
+		meta: {
+			title: "Emisor NIT",
+			type: "string",
+		},
+	},
+
+	{
 		id: "Receptor NIT",
 		accessorFn: (row) => row.receptor?.nit || "",
 		meta: {
@@ -85,10 +86,10 @@ const columns: ColumnDef<DTE>[] = [
 		},
 	},
 	{
-		id: "Receptor Nombre",
+		id: "Receptor",
 		accessorFn: (row) => row.receptor?.nombre,
 		meta: {
-			title: "Receptor Nombre",
+			title: "Receptor",
 			type: "string",
 		},
 	},
@@ -122,6 +123,19 @@ const columns: ColumnDef<DTE>[] = [
 		},
 	},
 	{
+		id: "Comisión",
+		accessorFn: (row) => {
+			if (row.cuerpoDocumento && "comision" in row.cuerpoDocumento) {
+				return Number(row.cuerpoDocumento.comision).toFixed(2);
+			}
+			return "";
+		},
+		meta: {
+			title: "Comisión",
+			type: "number",
+		},
+	},
+	{
 		id: "IVA",
 		accessorFn: (row) => {
 			if (row.cuerpoDocumento && "iva" in row.cuerpoDocumento) {
@@ -148,19 +162,6 @@ const columns: ColumnDef<DTE>[] = [
 		},
 	},
 	{
-		id: "Comisión",
-		accessorFn: (row) => {
-			if (row.cuerpoDocumento && "comision" in row.cuerpoDocumento) {
-				return Number(row.cuerpoDocumento.comision).toFixed(2);
-			}
-			return "";
-		},
-		meta: {
-			title: "Comisión",
-			type: "number",
-		},
-	},
-	{
 		id: "Líquido a Pagar",
 		accessorFn: (row) => {
 			if (row.cuerpoDocumento && "liquidoApagar" in row.cuerpoDocumento) {
@@ -171,6 +172,19 @@ const columns: ColumnDef<DTE>[] = [
 		meta: {
 			title: "Líquido a Pagar",
 			type: "number",
+		},
+	},
+	{
+		id: "Código Liquidación",
+		accessorFn: (row) => {
+			if (row.cuerpoDocumento && "codLiquidacion" in row.cuerpoDocumento) {
+				return row.cuerpoDocumento.codLiquidacion;
+			}
+			return "";
+		},
+		meta: {
+			title: "Código Liquidación",
+			type: "string",
 		},
 	},
 	{
