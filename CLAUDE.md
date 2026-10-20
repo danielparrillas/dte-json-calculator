@@ -44,6 +44,10 @@ There is no schema validation: uploaded JSONs are stored untyped and each sectio
 
 `src/hooks/dteStore.ts` is the single Zustand store (`format`, `jsons`, `errors`, `selectedJson`). State is mutated through exported module-level functions (`setDteFormat`, `setJsonsFromFiles`, `setSelectedJson`); components only *read* via `useDteStore(selector)`. Upload is disabled until a format is chosen. `setJsonsFromFiles` parses every file in parallel and partitions results into `jsons` and `errors`, so a malformed file never blocks the rest (errors render in `partials/errors-section.tsx`).
 
+### Product catalog (optional)
+
+`src/hooks/productosStore.ts` is a second Zustand store for an optional product catalog (`.xlsx`/`.xls`/`.json`, parsed by `src/utils/fileToRows.ts`). The user maps which column is the code and which is the type (`M` Mercadería / `S` Servicio); both are auto-detected on load. When configured, `useCatalogoProductos()` returns a code → type lookup, and the items tables tag each row with `tipoProducto`, add the "Tipo producto" / "Mercadería" / "Servicio" columns via `withProductoColumns` (`src/utils/productoColumns.ts`), and show the type filter cards (`partials/select-tipo-producto-section.tsx`). Codes are matched trimmed and case-insensitively, falling back to a comparison without leading zeros.
+
 ### Table shell
 
 `src/components/ui/data-table.tsx` is the generic TanStack Table v8 shell: per-column popover header with filter/sort/hide, column-visibility dropdown, pagination, XLSX export, and an auto-summing footer (`DataTableTotal`). Sections extend it via props (`filterBy`, `exportedFileName`, `initialColumnVisibility`, `headerContent`, …) rather than building their own tables. Each section owns its `ColumnDef<T>[]` at module scope.

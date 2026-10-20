@@ -21,6 +21,7 @@ import { useDteStore } from "./hooks/dteStore";
 import { DTEFormat } from "./types/dteFormatEnum";
 import CCFTTableSection from "./partials/ccf-t/ccf-t-table-section";
 import CCFTItemsTableSection from "./partials/ccf-t/ccf-t-items-table-section";
+import ProductosSection from "./partials/productos-section";
 
 function App() {
 	const dteFormat = useDteStore((state) => state.format);
@@ -93,10 +94,26 @@ function App() {
 					<>
 						<Accordion type="single" collapsible className="mb-4 mt-12">
 							<AccordionItem value="item-1">
-								<AccordionTrigger>Paso 5: Detalle por items</AccordionTrigger>
+								<AccordionTrigger>
+									Paso 5 (opcional): Base de datos de productos
+								</AccordionTrigger>
+								<AccordionContent>
+									Carga un catálogo de productos en .xlsx, .xls o .json y elige
+									qué columna corresponde al código y cuál al tipo (M
+									Mercadería o S Servicio). Con esto el detalle por items
+									muestra las columnas Mercadería y Servicio y permite filtrar
+									por tipo.
+								</AccordionContent>
+							</AccordionItem>
+						</Accordion>
+						<ProductosSection />
+						<Accordion type="single" collapsible className="mb-4 mt-12">
+							<AccordionItem value="item-1">
+								<AccordionTrigger>Paso 6: Detalle por items</AccordionTrigger>
 								<AccordionContent>
 									Se muestra una tabla con los detalles de los items de cada
-									DTE.
+									DTE. Si cargaste la base de productos, puedes filtrar según
+									el tipo: Mercadería, Servicio o No identificado.
 								</AccordionContent>
 							</AccordionItem>
 						</Accordion>

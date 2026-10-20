@@ -1,28 +1,65 @@
 import { Button } from "@/components/ui/button";
 import { DataTable } from "@/components/ui/data-table";
 import { setSelectedJson, useFilteredJsons } from "@/hooks/dteStore";
+import {
+	getTipoProducto,
+	TipoProducto,
+	useCatalogoProductos,
+	useProductosStore,
+} from "@/hooks/productosStore";
 import { CuerpoDocumento, DTE } from "@/types/ccf_t";
 import { obtenerValorSelloForCCF } from "@/utils/selloSupport";
+import { withProductoColumns } from "@/utils/productoColumns";
 import { ColumnDef } from "@tanstack/react-table";
 import { Eye } from "lucide-react";
+import { useMemo } from "react";
+import SelectTipoProductoSection from "@/partials/select-tipo-producto-section";
 
 type Item = {
 	item: CuerpoDocumento;
 	dte: DTE;
+	tipoProducto?: TipoProducto;
 };
 
 function CCFTItemsTableSection() {
 	const jsons = useFilteredJsons();
+	const catalogo = useCatalogoProductos();
+	const excludedTiposProducto = useProductosStore(
+		(state) => state.excludedTiposProducto
+	);
 	const items: Item[] = (jsons as DTE[])
 		.filter(
 			(json) => json.cuerpoDocumento && Array.isArray(json.cuerpoDocumento)
 		)
 		.map((json) =>
-			(json.cuerpoDocumento || []).map((item) => ({ item, dte: json }))
+			(json.cuerpoDocumento || []).map((item) => ({
+				item,
+				dte: json,
+				tipoProducto: catalogo
+					? getTipoProducto(catalogo, item.codigo)
+					: undefined,
+			}))
 		)
 		.flat();
+	const tableColumns = useMemo(
+		() => (catalogo ? withProductoColumns(columns) : columns),
+		[catalogo]
+	);
+	const filteredItems = items.filter(
+		({ tipoProducto }) =>
+			!tipoProducto || !excludedTiposProducto.includes(tipoProducto)
+	);
 
-	return <DataTable columns={columns} data={items} filterBy="Emisor NIT" />;
+	return (
+		<>
+			{catalogo && <SelectTipoProductoSection items={items} />}
+			<DataTable
+				columns={tableColumns}
+				data={filteredItems}
+				filterBy="Emisor NIT"
+			/>
+		</>
+	);
 }
 const columns: ColumnDef<Item>[] = [
 	{
