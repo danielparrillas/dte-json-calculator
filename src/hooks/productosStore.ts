@@ -1,6 +1,8 @@
 import { FileRows } from "@/utils/fileToRows";
+import { indexedDbStorage } from "@/utils/indexedDbStorage";
 import { useMemo } from "react";
 import { create } from "zustand";
+import { createJSONStorage, persist } from "zustand/middleware";
 
 export const TIPOS_PRODUCTO = [
 	"Mercadería",
@@ -19,14 +21,31 @@ interface ProductosStore {
 	excludedTiposProducto: TipoProducto[];
 }
 
-export const useProductosStore = create<ProductosStore>()(() => ({
-	fileName: null,
-	columns: [],
-	rows: [],
-	codigoColumn: null,
-	tipoColumn: null,
-	excludedTiposProducto: [],
-}));
+// El catálogo se guarda en el navegador para no tener que cargarlo en cada visita
+export const useProductosStore = create<ProductosStore>()(
+	persist(
+		(): ProductosStore => ({
+			fileName: null,
+			columns: [],
+			rows: [],
+			codigoColumn: null,
+			tipoColumn: null,
+			excludedTiposProducto: [],
+		}),
+		{
+			name: "catalogo-productos",
+			version: 1,
+			storage: createJSONStorage(() => indexedDbStorage),
+			partialize: ({ fileName, columns, rows, codigoColumn, tipoColumn }) => ({
+				fileName,
+				columns,
+				rows,
+				codigoColumn,
+				tipoColumn,
+			}),
+		}
+	)
+);
 
 // "M" / "Mercadería" -> Mercadería, "S" / "Servicio" -> Servicio
 export const parseTipoProducto = (value: unknown): TipoProducto | null => {
