@@ -38,7 +38,7 @@ export const parseTipoProducto = (value: unknown): TipoProducto | null => {
 	return null;
 };
 
-const normalizarCodigo = (value: unknown) =>
+export const normalizarCodigo = (value: unknown) =>
 	String(value ?? "")
 		.trim()
 		.toUpperCase();
