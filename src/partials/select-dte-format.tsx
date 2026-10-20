@@ -10,13 +10,9 @@ const DTE_FORMATS = [
 	},
 	{
 		id: DTEFormat.CCF_T,
-		name: "CCF-TARJ",
-		description: "Comprobante de Crédito Fiscal - Tarjeta",
-	},
-	{
-		id: DTEFormat.DCL_T,
-		name: "DCL-TARJ",
-		description: "Documento Contable de Liquidación - Tarjeta",
+		name: "TARJ",
+		description:
+			"Comprobante de Crédito Fiscal y Documento Contable de Liquidación - Tarjeta",
 	},
 ];
 

@@ -19,7 +19,6 @@ import CCFItemsTableSection from "./partials/ccf/ccf-items-table-section";
 import { useDteStore } from "./hooks/dteStore";
 import { DTEFormat } from "./types/dteFormatEnum";
 import CCFTTableSection from "./partials/ccf-t/ccf-t-table-section";
-import DCLTTableSection from "./partials/dcl-t/dcl-t-t-table-section";
 import CCFTItemsTableSection from "./partials/ccf-t/ccf-t-items-table-section";
 
 function App() {
@@ -45,8 +44,8 @@ function App() {
 						<AccordionTrigger>Paso 1: Elije el formato</AccordionTrigger>
 						<AccordionContent>
 							Selecciona el formato de tabla que deseas utilizar para explorar
-							los archivos JSON de los DTE. Puedes elegir entre formato CCF,
-							CCF-T y DCL-T
+							los archivos JSON de los DTE. Puedes elegir entre formato CCF y
+							TARJ
 						</AccordionContent>
 					</AccordionItem>
 				</Accordion>
@@ -76,8 +75,6 @@ function App() {
 				</Accordion>
 				{dteFormat === DTEFormat.CCF_T ? (
 					<CCFTTableSection />
-				) : dteFormat === DTEFormat.DCL_T ? (
-					<DCLTTableSection />
 				) : (
 					<CCFTableSection />
 				)}

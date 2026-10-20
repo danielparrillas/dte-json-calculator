@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { DataTable } from "@/components/ui/data-table";
 import { setSelectedJson, useDteStore } from "@/hooks/dteStore";
 import { DTE } from "@/types/ccf_t";
+import { CuerpoDocumento as CuerpoDocumentoDCL } from "@/types/dcl_t";
 import { obtenerValorSelloForCCFT } from "@/utils/selloSupport";
 import { ColumnDef } from "@tanstack/react-table";
 import { Eye } from "lucide-react";
@@ -12,6 +13,15 @@ function CCFTTableSection() {
 		<DataTable columns={columns} data={jsons as DTE[]} filterBy="Emisor NIT" />
 	);
 }
+// Los DCL (liquidación) traen cuerpoDocumento como objeto en lugar de arreglo
+function liquidacion(row: DTE): CuerpoDocumentoDCL | null {
+	const cuerpo: unknown = row.cuerpoDocumento;
+	if (cuerpo && typeof cuerpo === "object" && !Array.isArray(cuerpo)) {
+		return cuerpo as CuerpoDocumentoDCL;
+	}
+	return null;
+}
+
 const columns: ColumnDef<DTE>[] = [
 	{
 		id: "Fecha de emisión",
@@ -162,6 +172,90 @@ const columns: ColumnDef<DTE>[] = [
 		meta: {
 			title: "Total IVA",
 			type: "number",
+		},
+	},
+	{
+		id: "Valor Operaciones",
+		accessorFn: (row) => {
+			const cuerpo = liquidacion(row);
+			if (cuerpo && "valorOperaciones" in cuerpo) {
+				return Number(cuerpo.valorOperaciones).toFixed(2);
+			}
+			return "";
+		},
+		meta: {
+			title: "Valor Operaciones",
+			type: "number",
+		},
+	},
+	{
+		id: "Comisión",
+		accessorFn: (row) => {
+			const cuerpo = liquidacion(row);
+			if (cuerpo && "comision" in cuerpo) {
+				return Number(cuerpo.comision).toFixed(2);
+			}
+			return "";
+		},
+		meta: {
+			title: "Comisión",
+			type: "number",
+		},
+	},
+	{
+		id: "IVA",
+		accessorFn: (row) => {
+			const cuerpo = liquidacion(row);
+			if (cuerpo && "iva" in cuerpo) {
+				return Number(cuerpo.iva).toFixed(2);
+			}
+			return "";
+		},
+		meta: {
+			title: "IVA",
+			type: "number",
+		},
+	},
+	{
+		id: "IVA Percibido",
+		accessorFn: (row) => {
+			const cuerpo = liquidacion(row);
+			if (cuerpo && "ivaPercibido" in cuerpo) {
+				return Number(cuerpo.ivaPercibido).toFixed(2);
+			}
+			return "";
+		},
+		meta: {
+			title: "IVA Percibido",
+			type: "number",
+		},
+	},
+	{
+		id: "Líquido a Pagar",
+		accessorFn: (row) => {
+			const cuerpo = liquidacion(row);
+			if (cuerpo && "liquidoApagar" in cuerpo) {
+				return Number(cuerpo.liquidoApagar).toFixed(2);
+			}
+			return "";
+		},
+		meta: {
+			title: "Líquido a Pagar",
+			type: "number",
+		},
+	},
+	{
+		id: "Código Liquidación",
+		accessorFn: (row) => {
+			const cuerpo = liquidacion(row);
+			if (cuerpo && "codLiquidacion" in cuerpo) {
+				return cuerpo.codLiquidacion;
+			}
+			return "";
+		},
+		meta: {
+			title: "Código Liquidación",
+			type: "string",
 		},
 	},
 	{
