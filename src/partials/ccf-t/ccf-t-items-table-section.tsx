@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { DataTable } from "@/components/ui/data-table";
-import { setSelectedJson, useDteStore } from "@/hooks/dteStore";
+import { setSelectedJson, useFilteredJsons } from "@/hooks/dteStore";
 import { CuerpoDocumento, DTE } from "@/types/ccf_t";
 import { obtenerValorSelloForCCF } from "@/utils/selloSupport";
 import { ColumnDef } from "@tanstack/react-table";
@@ -12,7 +12,7 @@ type Item = {
 };
 
 function CCFTItemsTableSection() {
-	const jsons = useDteStore((state) => state.jsons);
+	const jsons = useFilteredJsons();
 	const items: Item[] = (jsons as DTE[])
 		.filter(
 			(json) => json.cuerpoDocumento && Array.isArray(json.cuerpoDocumento)

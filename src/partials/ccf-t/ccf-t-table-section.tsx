@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { DataTable } from "@/components/ui/data-table";
-import { setSelectedJson, useDteStore } from "@/hooks/dteStore";
+import { setSelectedJson, useFilteredJsons } from "@/hooks/dteStore";
 import { DTE } from "@/types/ccf_t";
 import { CuerpoDocumento as CuerpoDocumentoDCL } from "@/types/dcl_t";
 import { obtenerValorSelloForCCFT } from "@/utils/selloSupport";
@@ -8,7 +8,7 @@ import { ColumnDef } from "@tanstack/react-table";
 import { Eye } from "lucide-react";
 
 function CCFTTableSection() {
-	const jsons = useDteStore((state) => state.jsons);
+	const jsons = useFilteredJsons();
 	return (
 		<DataTable columns={columns} data={jsons as DTE[]} filterBy="Emisor NIT" />
 	);

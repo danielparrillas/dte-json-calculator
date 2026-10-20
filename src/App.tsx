@@ -12,6 +12,7 @@ import {
 	CardTitle,
 } from "./components/ui/card";
 import ErrorsSection from "./partials/errors-section";
+import SelectTipoDteSection from "./partials/select-tipo-dte-section";
 import { SelectDTEFormat } from "./partials/select-dte-format";
 import CCFTableSection from "./partials/ccf/ccf-table-section";
 import UpploadSection from "./partials/uppload-section";
@@ -64,8 +65,18 @@ function App() {
 				<ErrorsSection />
 				<Accordion type="single" collapsible className="mb-4 mt-12">
 					<AccordionItem value="item-1">
+						<AccordionTrigger>Paso 3: Elije los tipos de DTE</AccordionTrigger>
+						<AccordionContent>
+							Selecciona los tipos de DTE que deseas incluir en los resultados.
+							Por defecto se incluyen todos; puedes elegir uno o varios.
+						</AccordionContent>
+					</AccordionItem>
+				</Accordion>
+				<SelectTipoDteSection />
+				<Accordion type="single" collapsible className="mb-4 mt-12">
+					<AccordionItem value="item-1">
 						<AccordionTrigger>
-							Paso 3: Cálculo de los resultados
+							Paso 4: Cálculo de los resultados
 						</AccordionTrigger>
 						<AccordionContent>
 							Se extraen los datos de los archivos JSON y se presentan en una
@@ -82,7 +93,7 @@ function App() {
 					<>
 						<Accordion type="single" collapsible className="mb-4 mt-12">
 							<AccordionItem value="item-1">
-								<AccordionTrigger>Paso 4: Detalle por items</AccordionTrigger>
+								<AccordionTrigger>Paso 5: Detalle por items</AccordionTrigger>
 								<AccordionContent>
 									Se muestra una tabla con los detalles de los items de cada
 									DTE.
