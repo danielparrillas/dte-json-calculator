@@ -102,6 +102,9 @@ export type Resumen = {
 	condicionOperacion?: number | null;
 	pagos?: Pago[] | null;
 	numPagoElectronico?: string | null;
+	// Comprobante de Retención (07)
+	totalSujetoRetencion?: number | null;
+	totalIVAretenido?: number | null;
 };
 
 export type Extension = {

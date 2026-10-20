@@ -259,6 +259,28 @@ const columns: ColumnDef<DTE>[] = [
 		},
 	},
 	{
+		id: "Monto Sujeto a Retención",
+		accessorFn: (row) => {
+			const monto = row.resumen?.totalSujetoRetencion;
+			return monto == null ? "" : Number(monto).toFixed(2);
+		},
+		meta: {
+			title: "Monto Sujeto a Retención",
+			type: "number",
+		},
+	},
+	{
+		id: "IVA Retenido",
+		accessorFn: (row) => {
+			const iva = row.resumen?.totalIVAretenido;
+			return iva == null ? "" : Number(iva).toFixed(2);
+		},
+		meta: {
+			title: "IVA Retenido",
+			type: "number",
+		},
+	},
+	{
 		id: "Acciones",
 		header: "",
 		accessorFn: () => "",
